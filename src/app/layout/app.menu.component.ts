@@ -21,6 +21,21 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
+                label: 'Movimientos',
+                items: [
+                    { label: 'Entrada', icon: 'pi pi-arrow-circle-down', routerLink: ['/sistema/entrada'] },
+                    { label: 'Salida', icon: 'pi pi-arrow-circle-up', routerLink: ['/sistema/salidas'] }
+                ]
+            },
+            {
+                label: 'Sistema',
+                items: [
+                    { label: 'Clientes', icon: 'pi pi-users', routerLink: ['/sistema/clientes'] },
+                    { label: 'Articulos', icon: 'pi pi-box', routerLink: ['/sistema/articulos'] },
+                    { label: 'Depositos', icon: 'pi pi-th-large', routerLink: ['/sistema/depositos'] }
+                ]
+            },
+            {
                 label: 'UI Components',
                 items: [
                     { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'] },

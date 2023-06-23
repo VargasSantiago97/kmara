@@ -1,0 +1,41 @@
+<div class="formgrid grid">
+    <div class="field col-12 lg:col-6 xl:col-3" style="padding: 2px;">
+        <h5>Rubro:</h5>
+        <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
+        <br><br>
+        <p-listbox [options]="rubros" [(ngModel)]="selectedRubro" [metaKeySelection]="false" [filter]="true"
+            optionLabel="alias" optienValue="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
+            <ng-template let-rubro pTemplate="item">
+                <div class="rubro-item">
+                    <div>{{rubro.alias}}</div>
+                </div>
+            </ng-template>
+        </p-listbox>
+    </div>
+    <div class="field col-12 lg:col-6 xl:col-3" style="padding: 2px;">
+        <h5>SubRubro:</h5>
+        <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
+        <br><br>
+        <p-listbox [options]="rubros" [(ngModel)]="selectedRubro" [metaKeySelection]="false" [filter]="true"
+            optionLabel="alias" optienValue="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
+            <ng-template let-rubro pTemplate="item">
+                <div class="rubro-item">
+                    <div>{{rubro.alias}}</div>
+                </div>
+            </ng-template>
+        </p-listbox>
+    </div>
+    <div class="field col-12 lg:col-6 xl:col-6" style="padding: 2px;">
+        <h5>Articulos:</h5>
+        <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
+        <br><br>
+        <p-listbox [options]="rubros" [(ngModel)]="selectedRubro" [metaKeySelection]="false" [filter]="true"
+            optionLabel="alias" optienValue="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
+            <ng-template let-rubro pTemplate="item">
+                <div class="rubro-item">
+                    <div>{{rubro.alias}}</div>
+                </div>
+            </ng-template>
+        </p-listbox>
+    </div>
+</div>

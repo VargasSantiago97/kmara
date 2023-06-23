@@ -1,0 +1,8 @@
+<h4>Clientes</h4>
+
+<br>
+<p-button styleClass="p-button-sm" label="Nuevo"></p-button>
+<br><br>
+
+
+<app-table [cols]="colsClientes" [datos]="datosClientes" [botones]="botonesClientes" [totales]="{id: 'TOTALES'}" (seleccionado)="mostrar($event)" (boton)="mostrar($event)"></app-table>

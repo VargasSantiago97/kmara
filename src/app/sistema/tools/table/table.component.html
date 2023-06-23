@@ -1,0 +1,29 @@
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th *ngFor="let col of cols">{{col.header}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dato of datos" (dblclick)="dblClick(dato)">
+            <td *ngFor="let col of cols">
+                <p *ngIf="col.type == 'text'">{{dato[col.field]}}</p>
+
+                <input *ngIf="col.type == 'input'" type="text" [(ngModel)]="dato[col.field]">
+                <input *ngIf="col.type == 'inputNumber'" type="number" [(ngModel)]="dato[col.field]">
+                
+                <div *ngIf="col.type == 'button'">
+
+                    <button *ngFor="let boton of botones" class="boton" [style]="{'background-color': boton.background}" (click)="button({boton: boton.id, dato: dato.id})"><i class="{{boton.icon}}"></i></button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr *ngIf="totales">
+            <td *ngFor="let col of cols">
+                {{totales[col.field]}}
+            </td>
+        </tr>
+    </tfoot>
+</table>
