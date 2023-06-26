@@ -22,18 +22,41 @@ export class ArticulosComponent {
         ]
     }
 
+    solicitarToken(){
+        this.cs.autorizar('admin', '123456798').subscribe(
+            (res:any) => {
+                if(res.ok){
+                    console.log(res)
+                    sessionStorage.setItem('token', res.data)
+                } else {
+                    console.error(res.mensaje)
+                }
+            },
+            (err:any) => {
+                console.error(err)
+            }
+        )
+    }
+
     VER(){
         this.cs.getDB('users').subscribe(
             (res:any) => {
-                res.forEach((e:any) => {
-                    if(e.datos){
-                        e.datos = JSON.parse(e.datos)
-                    }
-                });
-                console.log(res)
+                if(res.ok){
+                    res.data.forEach((e:any) => {
+                        if(e.datos){
+                            if(JSON.parse(e.datos)){
+                                e.datos = JSON.parse(e.datos)
+                            }
+                        }
+                    });
+                    console.log(res)
+                } else {
+                    console.error(res.mensaje)
+                }
+
             },
             (err:any) => {
-                console.log(err)
+                console.error(err)
             }
         )
     }
@@ -46,7 +69,7 @@ export class ArticulosComponent {
             email: 'santy',
             contrasena: 'santy',
             imagen: 'santy',
-            datos: 'santy',
+            datos: '{}',
             estado: 1,
         }).subscribe(
             (res:any) => {

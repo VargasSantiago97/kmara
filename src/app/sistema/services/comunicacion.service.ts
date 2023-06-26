@@ -20,7 +20,7 @@ export class ComunicacionService {
     //Consultas a DB
     getDB(tabla: any) {
         var sent = 'SELECT * FROM ' + tabla 
-        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent });
+        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
     }
     createDB(tabla: any, data: any) {
         var sent = 'INSERT INTO ' + tabla + ' ('
@@ -35,7 +35,7 @@ export class ComunicacionService {
 
         sent = sent.slice(0, -3) + ')'
 
-        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent });
+        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
     }
     updateDB(tabla: any, data: any) {
         var sent = 'UPDATE ' + tabla + ' SET '
@@ -48,11 +48,20 @@ export class ComunicacionService {
         sent = sent.slice(0, -2)
         sent += ' WHERE id = "' + data.id + '"'
 
-        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent });
+        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
     }
     deleteDB(tabla: any, idd: any) {
         const sent = 'DELETE FROM ' + tabla + ' WHERE id = "' + idd + '"'
-        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent });
+        return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
+    }
+
+    getToken(){
+        var token = sessionStorage.getItem('token')
+        return token
+    }
+
+    autorizar(user:any, pass: any){
+        return this.http.post(`${this.API_URI}/index.php`, { autorizar: { user: user, pass: pass } });
     }
 
 }

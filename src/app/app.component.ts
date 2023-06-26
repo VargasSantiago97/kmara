@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { AuthService } from './services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -7,9 +8,20 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent implements OnInit {
 
-    constructor(private primengConfig: PrimeNGConfig) { }
+    constructor(
+        private primengConfig: PrimeNGConfig,
+        private auth: AuthService
+    ) { }
 
     ngOnInit() {
         this.primengConfig.ripple = true;
+
+        console.log(this.auth.existeSesion())
+
     }
+
+    ngDoCheck(){
+        console.log(this.auth.existeSesion())
+    }
+
 }
