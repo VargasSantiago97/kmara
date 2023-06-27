@@ -9,6 +9,8 @@ declare var vars: any;
 export class AuthService {
 
     API_URI = vars.API_URI_DATABASE;
+    
+    CONTROLADOR_SESION = false;
 
     EXISTE_SESION = false;
 
@@ -35,6 +37,8 @@ export class AuthService {
     crearSesion(user:any, pass:any) {
         return this.http.post(`${this.API_URI}/index.php`, { autorizar: { user: user, pass: pass } });
     }
+
+
 }
 
 
