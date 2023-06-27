@@ -16,12 +16,12 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.primengConfig.ripple = true;
 
-        console.log(this.auth.existeSesion())
+        //console.log(this.auth.existeSesion())
 
     }
 
     ngDoCheck(){
-        console.log(this.auth.existeSesion())
+        //console.log(this.auth.existeSesion())
     }
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 declare var vars: any;
 
@@ -15,14 +16,15 @@ export class ComunicacionService {
     }
     constructor(
         private http: HttpClient,
+        private messageService: MessageService
     ) { }
 
     //Consultas a DB
-    getDB(tabla: any) {
+    getDBServer(tabla: any) {
         var sent = 'SELECT * FROM ' + tabla 
         return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
     }
-    createDB(tabla: any, data: any) {
+    createDBServer(tabla: any, data: any) {
         var sent = 'INSERT INTO ' + tabla + ' ('
         sent += this.formatoColumnas[tabla].join(', ')
         sent += ') VALUES ("'
@@ -37,7 +39,7 @@ export class ComunicacionService {
 
         return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
     }
-    updateDB(tabla: any, data: any) {
+    updateDBServer(tabla: any, data: any) {
         var sent = 'UPDATE ' + tabla + ' SET '
 
         for (let i = 0; i < this.formatoColumnas[tabla].length; i++) {
@@ -50,7 +52,7 @@ export class ComunicacionService {
 
         return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
     }
-    deleteDB(tabla: any, idd: any) {
+    deleteDBServer(tabla: any, idd: any) {
         const sent = 'DELETE FROM ' + tabla + ' WHERE id = "' + idd + '"'
         return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });
     }
@@ -63,5 +65,94 @@ export class ComunicacionService {
     autorizar(user:any, pass: any){
         return this.http.post(`${this.API_URI}/index.php`, { autorizar: { user: user, pass: pass } });
     }
+
+
+    //Consultas LOCALES:
+    getDB(tabla:any, datosGuardar:any, fn:any = false){
+        this.getDBServer(tabla, ).subscribe(
+            (res:any) => {
+                if(res.ok){
+                    res.data.forEach((e:any) => {
+                        if(e.datos){
+                            if(JSON.parse(e.datos)){
+                                e.datos = JSON.parse(e.datos)
+                            }
+                        }
+                    });
+
+                    datosGuardar[tabla] = res.data
+
+                    if(fn){
+                        fn()
+                    }
+                } else {
+                    console.log(res)
+                    this.messageService.add({ severity: 'error', summary: 'Error en backend!', detail: res.mensaje })
+                }
+            },
+            (err:any) => {
+                console.error(err)
+                this.messageService.add({ severity: 'error', summary: 'Error conectando a backend!', detail: err })
+            }
+        )
+    }
+    
+    createDB(tabla:any, datosGuardar:any, fn:any = false){
+        this.createDBServer(tabla, datosGuardar).subscribe(
+            (res:any) => {
+                if(res.ok){
+                    if(fn){
+                        fn()
+                    }
+                } else {
+                    console.log(res)
+                    this.messageService.add({ severity: 'error', summary: 'Error en backend!', detail: res.mensaje })
+                }
+            },
+            (err:any) => {
+                console.error(err)
+                this.messageService.add({ severity: 'error', summary: 'Error conectando a backend!', detail: err })
+            }
+        )
+    }
+
+    updateDB(tabla:any, datosGuardar:any, fn:any = false){
+        this.updateDBServer(tabla, datosGuardar).subscribe(
+            (res:any) => {
+                if(res.ok){
+                    if(fn){
+                        fn()
+                    }
+                } else {
+                    console.log(res)
+                    this.messageService.add({ severity: 'error', summary: 'Error en backend!', detail: res.mensaje })
+                }
+            },
+            (err:any) => {
+                console.error(err)
+                this.messageService.add({ severity: 'error', summary: 'Error conectando a backend!', detail: err })
+            }
+        )
+    }
+    
+    deleteDB(tabla:any, idd:any, fn:any = false){
+        this.deleteDBServer(tabla, idd).subscribe(
+            (res:any) => {
+                if(res.ok){
+                    if(fn){
+                        fn()
+                    }
+                } else {
+                    console.log(res)
+                    this.messageService.add({ severity: 'error', summary: 'Error en backend!', detail: res.mensaje })
+                }
+            },
+            (err:any) => {
+                console.error(err)
+                this.messageService.add({ severity: 'error', summary: 'Error conectando a backend!', detail: err })
+            }
+        )
+    }
+
 
 }

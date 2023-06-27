@@ -39,30 +39,13 @@ export class ArticulosComponent {
     }
 
     VER(){
-        this.cs.getDB('users').subscribe(
-            (res:any) => {
-                if(res.ok){
-                    res.data.forEach((e:any) => {
-                        if(e.datos){
-                            if(JSON.parse(e.datos)){
-                                e.datos = JSON.parse(e.datos)
-                            }
-                        }
-                    });
-                    console.log(res)
-                } else {
-                    console.error(res.mensaje)
-                }
-
-            },
-            (err:any) => {
-                console.error(err)
-            }
-        )
+        var data:any = {}
+        this.cs.getDB('users', data, () => { console.log(data) })
     }
+
     CREAR(){
-        this.cs.createDB('users', {
-            id: 123,
+        var data:any = {
+            id: 1233,
             alias: 'santy',
             nombre: 'santy',
             apellido: 'santy',
@@ -71,44 +54,30 @@ export class ArticulosComponent {
             imagen: 'santy',
             datos: '{}',
             estado: 1,
-        }).subscribe(
-            (res:any) => {
-                console.log(res)
-            },
-            (err:any) => {
-                console.log(err)
-            }
-        )
+        }
+
+        this.cs.createDB('users', data, () => { console.log(data) } )
     }
     MODIFICAR(){
-        this.cs.updateDB('users', {
+        var data:any = {
             id: 123,
-            alias: 'santyyyy',
-            nombre: 'santyyyy',
-            apellido: 'santyyyy',
-            email: 'santyyyy',
-            contrasena: 'santyyyy',
-            imagen: 'santyyyy',
-            datos: 'santyyyy',
-            estado: 0,
-        }).subscribe(
-            (res:any) => {
-                console.log(res)
-            },
-            (err:any) => {
-                console.log(err)
-            }
-        )
+            alias: 'san',
+            nombre: 'san',
+            apellido: 'san',
+            email: 'san',
+            contrasena: 'san',
+            imagen: 'san',
+            datos: '{}',
+            estado: 1,
+        }
+
+        this.cs.updateDB('users', data, () => { console.log(data) })
     }
     ELIMINAR(){
-        this.cs.deleteDB('users', 123).subscribe(
-            (res:any) => {
-                console.log(res)
-            },
-            (err:any) => {
-                console.log(err)
-            }
-        )
+        this.cs.deleteDB('users', 1233, () => {
+            var data:any = {}
+            this.cs.getDB('users', data, () => { console.log(data) })
+        })
     }
 
 }

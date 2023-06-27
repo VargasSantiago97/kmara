@@ -22,6 +22,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { TableComponent } from './tools/table/table.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { ListboxModule } from 'primeng/listbox';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ListboxModule } from 'primeng/listbox';
     RatingModule,
     TableModule,
     ListboxModule
-  ]
+  ],
+  providers: [MessageService]
 })
 export class SistemaModule { }
 
