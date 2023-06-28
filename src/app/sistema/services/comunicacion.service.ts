@@ -62,11 +62,6 @@ export class ComunicacionService {
         return token
     }
 
-    autorizar(user:any, pass: any){
-        return this.http.post(`${this.API_URI}/index.php`, { autorizar: { user: user, pass: pass } });
-    }
-
-
     //Consultas LOCALES:
     getDB(tabla:any, datosGuardar:any, fn:any = false){
         this.getDBServer(tabla, ).subscribe(

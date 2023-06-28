@@ -18,6 +18,9 @@ import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 
+import { OverlayModule } from 'primeng/overlay';
+import { MenuModule } from 'primeng/menu';
+
 @NgModule({
     declarations: [
         AppMenuitemComponent,
@@ -39,7 +42,9 @@ import { AppLayoutComponent } from "./app.layout.component";
         InputSwitchModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        OverlayModule,
+        MenuModule
     ],
     exports: [AppLayoutComponent]
 })

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 declare var vars: any;
 
@@ -9,19 +10,18 @@ declare var vars: any;
 export class AuthService {
 
     API_URI = vars.API_URI_DATABASE;
-    
-    CONTROLADOR_SESION = false;
-
-    EXISTE_SESION = false;
-
-    formatoColumnas: any = {
-        users: ['id', 'alias', 'nombre', 'apellido', 'email', 'contrasena', 'imagen', 'datos', 'estado'],
-    }
 
     constructor(
         private http: HttpClient,
+        private router: Router
     ) { }
 
+    verificarSesion(){
+        console.log('sss')
+        if(!this.existeSesion()){
+            this.router.navigate(['/auth/login']);
+        }
+    }
     existeSesion(){
         const session = sessionStorage.getItem('session')
         if(session == 'ok'){
@@ -30,14 +30,22 @@ export class AuthService {
         return false
     }
 
-    setearSesionOk(){
+    setearSesionOk(token:any){
         sessionStorage.setItem('session', 'ok')
+        sessionStorage.setItem('token', token)
+        this.router.navigate(['/']);
+    }
+    cerrarSesion(){
+        sessionStorage.clear()
+        this.router.navigate(['/auth/login']);
     }
 
     crearSesion(user:any, pass:any) {
         return this.http.post(`${this.API_URI}/index.php`, { autorizar: { user: user, pass: pass } });
     }
-
+    codificarPassword(pass:any) {
+        return this.http.get(`${this.API_URI}/index.php?pass=${pass}`);
+    }
 
 }
 
