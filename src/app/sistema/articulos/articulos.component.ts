@@ -23,7 +23,8 @@ export class ArticulosComponent {
     }
 
     solicitarToken(){
-        this.cs.autorizar('admin', '123456798').subscribe(
+        //this.cs.autorizar('admin', '123456798').subscribe(
+        this.cs.autorizar('Santy', '1234').subscribe(
             (res:any) => {
                 if(res.ok){
                     console.log(res)
@@ -45,13 +46,13 @@ export class ArticulosComponent {
 
     CREAR(){
         var data:any = {
-            id: 1233,
-            alias: 'santy',
-            nombre: 'santy',
-            apellido: 'santy',
-            email: 'santy',
-            contrasena: 'santy',
-            imagen: 'santy',
+            id: 1,
+            alias: 'Santy',
+            nombre: 'Santiago',
+            apellido: 'Vargas',
+            email: 'oficina.sociedad.ny@gmail.com',
+            contrasena: '54b7b66470bcfaf011f10aaad6b4796a1c606f1421032faa40452dd530dc845b',
+            imagen: '',
             datos: '{}',
             estado: 1,
         }
