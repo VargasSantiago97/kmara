@@ -83,6 +83,11 @@ export class ArticulosComponent {
             }
         )
     }
+
+    crearTabla(){
+
+        //CREATE TABLE `moliendas`.`rubros` ( `id` VARCHAR(12) NOT NULL , `alias` INT NOT NULL , `color` INT NOT NULL , `datos` TEXT NOT NULL , `estado` INT NOT NULL ) ENGINE = InnoDB;
+    }
 /* 
     "id": 2490,
     "cod_articulo": 4,

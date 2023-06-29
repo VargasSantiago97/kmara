@@ -13,12 +13,19 @@ export class AppMenuComponent implements OnInit {
     constructor(public layoutService: LayoutService) { }
 
     ngOnInit() {
+
+        var items = [
+            { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+        ]
+
+        if(this.esAdmin()){
+            items.push({ label: 'DataBase', icon: 'pi pi-fw pi-database', routerLink: ['/sistema/database'] })
+        }
+
         this.model = [
             {
                 label: 'Home',
-                items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
-                ]
+                items: items
             },
             {
                 label: 'Movimientos',
@@ -176,5 +183,17 @@ export class AppMenuComponent implements OnInit {
                 ]
             }
         ];
+    }
+
+    esAdmin(){
+        var token:any = sessionStorage.getItem('token');
+        if(token){
+            var texto = token.split('.');
+            if(texto[0]){
+                var data = JSON.parse(atob(texto[0]))
+                return data['rol'] == 'admin'
+            }
+        }
+        return false
     }
 }

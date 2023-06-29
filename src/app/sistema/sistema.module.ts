@@ -23,13 +23,15 @@ import { TableComponent } from './tools/table/table.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { ListboxModule } from 'primeng/listbox';
 import { MessageService } from 'primeng/api';
+import { DatabaseComponent } from './database/database.component';
 
 @NgModule({
   declarations: [
     ClientesComponent,
     ToolsComponent,
     TableComponent,
-    ArticulosComponent
+    ArticulosComponent,
+    DatabaseComponent
   ],
   imports: [
     CommonModule,
