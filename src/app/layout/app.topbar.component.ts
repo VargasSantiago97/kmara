@@ -57,10 +57,12 @@ export class AppTopBarComponent {
     nombreUsuario(){
         var nombre: any = ''
         var token:any = sessionStorage.getItem('token');
-        var texto = token.split('.');
-        if(texto[0]){
-            var data = JSON.parse(atob(texto[0]))
-            nombre = data['apellido'] + ', ' + data['nombre']
+        if(token){
+            var texto = token.split('.');
+            if(texto[0]){
+                var data = JSON.parse(atob(texto[0]))
+                nombre = data['apellido'] + ', ' + data['nombre']
+            }
         }
         return nombre
     }
