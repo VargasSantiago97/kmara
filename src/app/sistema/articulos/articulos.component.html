@@ -1,52 +1,172 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: rgba(0, 54, 4, 0.315);
+    }
+
+    .fondoResaltado {
+        background-color: rgb(0, 54, 4);
+        color: aliceblue;
+    }
+</style>
+
 <div class="formgrid grid">
     <div class="field col-12 lg:col-6 xl:col-3" style="padding: 2px;">
-        <h5>Rubro:</h5>
-        <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
-        <br><br>
-        <p-listbox [options]="rubros" [(ngModel)]="selectedRubro" [metaKeySelection]="false" [filter]="true"
-            optionLabel="alias" optienValue="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
-            <ng-template let-rubro pTemplate="item">
-                <div class="rubro-item">
-                    <div>{{rubro.alias}}</div>
-                </div>
-            </ng-template>
-        </p-listbox>
+        <div class="card" style="margin: 0px 0px 30px 0px;">
+            <h5 style="text-align: center;"><strong>Rubro</strong></h5>
+            <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
+            <br><br>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="padding: 3px;">
+                            ALIAS
+                        </th>
+                        <th style="padding: 3px;">
+                            HAS
+                        </th>
+                        <th style="padding: 3px;">
+                            ACT
+                        </th>
+                        <th style="padding: 3px;">
+                            EST
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let campo of db_campos" (click)="campo_select = campo.id"
+                        class="{{campo_select ? (campo.id == campo_select ? 'fondoResaltado' : '') : ''}}">
+                        <td style="padding: 2px;">
+                            <label>{{campo.alias}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.has}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.activo}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.estado}}</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="field col-12 lg:col-6 xl:col-3" style="padding: 2px;">
-        <h5>SubRubro:</h5>
-        <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
-        <br><br>
-        <p-listbox [options]="rubros" [(ngModel)]="selectedRubro" [metaKeySelection]="false" [filter]="true"
-            optionLabel="alias" optienValue="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
-            <ng-template let-rubro pTemplate="item">
-                <div class="rubro-item">
-                    <div>{{rubro.alias}}</div>
-                </div>
-            </ng-template>
-        </p-listbox>
+        <div class="card" style="margin: 0px 0px 30px 0px;">
+            <h5 style="text-align: center;"><strong>SubRubro</strong></h5>
+            <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
+            <br><br>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="padding: 3px;">
+                            ALIAS
+                        </th>
+                        <th style="padding: 3px;">
+                            HAS
+                        </th>
+                        <th style="padding: 3px;">
+                            ACT
+                        </th>
+                        <th style="padding: 3px;">
+                            EST
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let campo of db_campos" (click)="campo_select = campo.id"
+                        class="{{campo_select ? (campo.id == campo_select ? 'fondoResaltado' : '') : ''}}">
+                        <td style="padding: 2px;">
+                            <label>{{campo.alias}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.has}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.activo}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.estado}}</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="field col-12 lg:col-6 xl:col-6" style="padding: 2px;">
-        <h5>Articulos:</h5>
-        <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
-        <br><br>
-        <p-listbox [options]="rubros" [(ngModel)]="selectedRubro" [metaKeySelection]="false" [filter]="true"
-            optionLabel="alias" optienValue="id" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
-            <ng-template let-rubro pTemplate="item">
-                <div class="rubro-item">
-                    <div>{{rubro.alias}}</div>
-                </div>
-            </ng-template>
-        </p-listbox>
+        <div class="card" style="margin: 0px 0px 30px 0px;">
+            <h5 style="text-align: center;"><strong>Articulos</strong></h5>
+            <p-button styleClass="p-button-sm" label="Nuevo"></p-button>
+            <br><br>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="padding: 3px;">
+                            ALIAS
+                        </th>
+                        <th style="padding: 3px;">
+                            HAS
+                        </th>
+                        <th style="padding: 3px;">
+                            ACT
+                        </th>
+                        <th style="padding: 3px;">
+                            EST
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let campo of db_campos" (click)="campo_select = campo.id"
+                        class="{{campo_select ? (campo.id == campo_select ? 'fondoResaltado' : '') : ''}}">
+                        <td style="padding: 2px;">
+                            <label>{{campo.alias}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.has}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.activo}}</label>
+                        </td>
+                        <td style="padding: 2px;">
+                            <label>{{campo.estado}}</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<button (click)="VER()">VER</button>
-<button (click)="CREAR()">CREAR</button>
-<button (click)="MODIFICAR()">MODIFICAR</button>
-<button (click)="ELIMINAR()">ELIMINAR</button>
-<br><br>
+
+<p-dialog header="RUBRO" [(visible)]="displayRubro" [modal]="true" [style]="{width: '700px'}"
+    [draggable]="true" [resizable]="true" [maximizable]="true">
+
+
+    <br><br>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" label="SALIR" class="p-button-danger bott"
+            (click)="displayRubro = false"></button>
+    </ng-template>
+
+</p-dialog>
 
 <br><br><br>
-
-<input type="text" [(ngModel)]="pass">
-<button (click)="solicitarPass()">VER</button>
+<p-button styleClass="p-button-sm" label="Crear Tabla" (click)="crearTabla()"></p-button>

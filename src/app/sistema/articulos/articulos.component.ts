@@ -14,6 +14,44 @@ export class ArticulosComponent {
 
     pass:any = ''
 
+    db_campos:any = [
+        {
+            id: 'asd1',
+            alias: 'asd1',
+            has: 'asd1',
+            activo: 'asd1',
+            estado: 'asd1',
+        },
+        {
+            id: 'asd2',
+            alias: 'asd1',
+            has: 'asd1',
+            activo: 'asd1',
+            estado: 'asd1',
+        },
+        {
+            id: 'asd3',
+            alias: 'asd1',
+            has: 'asd1',
+            activo: 'asd1',
+            estado: 'asd1',
+        },
+        {
+            id: 'asd4',
+            alias: 'asd1',
+            has: 'asd1',
+            activo: 'asd1',
+            estado: 'asd1',
+        }
+    ]
+
+    campo_select: any = ''
+
+
+    displayRubro: any = false
+    displaySubRubro: any = false
+    displayArticulo: any = false
+
     constructor(
         private cs: ComunicacionService,
         private auth: AuthService
@@ -69,22 +107,9 @@ export class ArticulosComponent {
     }
 
 
-    solicitarPass(){
-        this.auth.codificarPassword(this.pass).subscribe(
-            (res:any) => {
-                if(res.ok){
-                    console.log(res)
-                } else {
-                    console.error(res.mensaje)
-                }
-            },
-            (err:any) => {
-                console.error(err)
-            }
-        )
-    }
 
     crearTabla(){
+        //this.cs.getDB('users', data, () => { console.log(data) })
 
         //CREATE TABLE `moliendas`.`rubros` ( `id` VARCHAR(12) NOT NULL , `alias` INT NOT NULL , `color` INT NOT NULL , `datos` TEXT NOT NULL , `estado` INT NOT NULL ) ENGINE = InnoDB;
     }

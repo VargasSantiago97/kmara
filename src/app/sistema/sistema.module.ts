@@ -24,6 +24,7 @@ import { ArticulosComponent } from './articulos/articulos.component';
 import { ListboxModule } from 'primeng/listbox';
 import { MessageService } from 'primeng/api';
 import { DatabaseComponent } from './database/database.component';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { DatabaseComponent } from './database/database.component';
     SliderModule,
     RatingModule,
     TableModule,
-    ListboxModule
+    ListboxModule,
+    DialogModule
   ],
   providers: [MessageService]
 })
