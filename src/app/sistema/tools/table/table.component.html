@@ -1,29 +1,74 @@
-<table class="custom-table">
-    <thead>
-        <tr>
-            <th *ngFor="let col of cols">{{col.header}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let dato of datos" (dblclick)="dblClick(dato)">
-            <td *ngFor="let col of cols">
-                <p *ngIf="col.type == 'text'">{{dato[col.field]}}</p>
+<p-contextMenu #cm [model]="items"></p-contextMenu>
 
-                <input *ngIf="col.type == 'input'" type="text" [(ngModel)]="dato[col.field]">
-                <input *ngIf="col.type == 'inputNumber'" type="number" [(ngModel)]="dato[col.field]">
-                
-                <div *ngIf="col.type == 'button'">
+<div class="formgrid grid">
+    <div class="field col-12">
+        <div class="card">
+            <p-table #th [columns]="selectedColumns" [value]="datos" selectionMode="multiple" [metaKeySelection]="true"
+                [tableStyle]="{'min-width': '50rem'}"
+                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [rows]="25"
+                [showCurrentPageReport]="true" [(selection)]="selectedTabla"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10,25,50,100,1000,3000]" [(contextMenuSelection)]="selectedProduct"
+                [contextMenu]="cm" dataKey="alias">
+                <ng-template pTemplate="caption">
+                    <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                        selectedItemsLabel="{0} columnas seleccionadas" [style]="{'min-width': '300px'}"
+                        placeholder="Seleccionar columnas"></p-multiSelect>
 
-                    <button *ngFor="let boton of botones" class="boton" [style]="{'background-color': boton.background}" (click)="button({boton: boton.id, dato: dato.id})"><i class="{{boton.icon}}"></i></button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr *ngIf="totales">
-            <td *ngFor="let col of cols">
-                {{totales[col.field]}}
-            </td>
-        </tr>
-    </tfoot>
-</table>
+                    <button pButton pRipple type="button" label="FILTROS" class="p-button-success bott"
+                        style="margin: 6px; margin-left: 20px;"></button>
+
+                    <button pButton pRipple type="button" label="NUEVO VIAJE" class="p-button-success bott"
+                        style="margin: 6px;"></button>
+
+                    <button pButton pRipple type="button" label="BANDERAS" class="p-button-success bott"
+                        style="margin: 6px;"></button>
+
+
+                    <label style="margin-left: 60px;">Buscar: </label>
+
+
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th [style]="{padding: '2px'}" *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                            {{col.header}} <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-registro let-columns="columns" let-rowIndex="rowIndex">
+                    <tr (dblclick)="dblClick(registro)" [pSelectableRow]="registro" [pContextMenuRow]="registro.id"
+                        [pSelectableRowIndex]="rowIndex">
+                        <td *ngFor="let col of columns" [style]="{padding: '0px', height: '50px'}"
+                            title="{{col.header}}">
+
+                            <p *ngIf="col.type == 'text'">{{registro[col.field]}}</p>
+
+                            <input *ngIf="col.type == 'input'" type="text" [(ngModel)]="registro[col.field]">
+                            <input *ngIf="col.type == 'inputNumber'" type="number" [(ngModel)]="registro[col.field]">
+
+                            <div *ngIf="col.type == 'button'">
+
+                                <button *ngFor="let boton of botones" class="boton"
+                                    [style]="{'background-color': boton.background}"
+                                    (click)="button({boton: boton.id, registro: registro.id})"><i
+                                        class="{{boton.icon}}"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+
+                </ng-template>
+                <ng-template pTemplate="footer" let-columns>
+                    <tr>
+                        <td *ngFor="let col of columns">
+                            {{totales[col.field]}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

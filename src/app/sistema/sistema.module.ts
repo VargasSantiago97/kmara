@@ -25,6 +25,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { MessageService } from 'primeng/api';
 import { DatabaseComponent } from './database/database.component';
 import { DialogModule } from 'primeng/dialog';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { DialogModule } from 'primeng/dialog';
     RatingModule,
     TableModule,
     ListboxModule,
-    DialogModule
+    DialogModule,
+    ContextMenuModule
   ],
   providers: [MessageService]
 })
