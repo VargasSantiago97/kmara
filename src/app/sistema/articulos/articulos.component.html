@@ -35,33 +35,21 @@
                 <thead>
                     <tr>
                         <th style="padding: 3px;">
-                            ALIAS
+                            RUBRO
                         </th>
                         <th style="padding: 3px;">
-                            HAS
-                        </th>
-                        <th style="padding: 3px;">
-                            ACT
-                        </th>
-                        <th style="padding: 3px;">
-                            EST
+                            COLOR
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let campo of db_campos" (click)="campo_select = campo.id"
-                        class="{{campo_select ? (campo.id == campo_select ? 'fondoResaltado' : '') : ''}}">
+                    <tr *ngFor="let rubro of db.rubros" (click)="(selectedRubro == rubro.id ? selectedRubro=null : selectedRubro = rubro.id) && actualizarSubRubros()"
+                        class="{{selectedRubro ? (rubro.id == selectedRubro ? 'fondoResaltado' : '') : ''}}">
                         <td style="padding: 2px;">
-                            <label>{{campo.alias}}</label>
+                            <label>{{rubro.alias}}</label>
                         </td>
                         <td style="padding: 2px;">
-                            <label>{{campo.has}}</label>
-                        </td>
-                        <td style="padding: 2px;">
-                            <label>{{campo.activo}}</label>
-                        </td>
-                        <td style="padding: 2px;">
-                            <label>{{campo.estado}}</label>
+                            <div class="cuadroColor" [style]="{'background-color':rubro.color}">{{rubro.color}}</div>
                         </td>
                     </tr>
                 </tbody>
@@ -77,33 +65,21 @@
                 <thead>
                     <tr>
                         <th style="padding: 3px;">
-                            ALIAS
+                            SUBRUBRO
                         </th>
                         <th style="padding: 3px;">
-                            HAS
-                        </th>
-                        <th style="padding: 3px;">
-                            ACT
-                        </th>
-                        <th style="padding: 3px;">
-                            EST
+                            COLOR
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let campo of db_campos" (click)="campo_select = campo.id"
-                        class="{{campo_select ? (campo.id == campo_select ? 'fondoResaltado' : '') : ''}}">
+                    <tr *ngFor="let subrubro of subrubros" (click)="selectedSubRubro == subrubro.id ? selectedSubRubro=null : selectedSubRubro = subrubro.id"
+                        class="{{selectedSubRubro ? (subrubro.id == selectedSubRubro ? 'fondoResaltado' : '') : ''}}">
                         <td style="padding: 2px;">
-                            <label>{{campo.alias}}</label>
+                            <label>{{subrubro.alias}}</label>
                         </td>
                         <td style="padding: 2px;">
-                            <label>{{campo.has}}</label>
-                        </td>
-                        <td style="padding: 2px;">
-                            <label>{{campo.activo}}</label>
-                        </td>
-                        <td style="padding: 2px;">
-                            <label>{{campo.estado}}</label>
+                            <div class="cuadroColor" [style]="{'background-color':subrubro.color}">{{subrubro.color}}</div>
                         </td>
                     </tr>
                 </tbody>
@@ -133,8 +109,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let campo of db_campos" (click)="campo_select = campo.id"
-                        class="{{campo_select ? (campo.id == campo_select ? 'fondoResaltado' : '') : ''}}">
+                    <tr *ngFor="let campo of db_campos" (click)="selectedSubRubro = campo.id"
+                        class="{{selectedSubRubro ? (campo.id == selectedSubRubro ? 'fondoResaltado' : '') : ''}}">
                         <td style="padding: 2px;">
                             <label>{{campo.alias}}</label>
                         </td>
@@ -170,3 +146,4 @@
 
 <br><br><br>
 <p-button styleClass="p-button-sm" label="Crear Tabla" (click)="crearTabla()"></p-button>
+<p-button styleClass="p-button-sm" label="Crear Dato" (click)="CREAR()"></p-button>

@@ -13,6 +13,8 @@ export class ComunicacionService {
 
     formatoColumnas: any = {
         users: ['id', 'alias', 'nombre', 'apellido', 'email', 'contrasena', 'imagen', 'datos', 'estado'],
+        rubros: ['id', 'alias', 'color', 'datos', 'estado'],
+        subrubros: ['id', 'id_rubro', 'alias', 'color', 'datos', 'estado'],
     }
     constructor(
         private http: HttpClient,
@@ -20,6 +22,9 @@ export class ComunicacionService {
     ) { }
 
     //Consultas a DB
+    dbConsulta(consulta: any) {
+        return this.http.post(`${this.API_URI}/index.php`, { sentencia: consulta, token: this.getToken() });
+    }
     getDBServer(tabla: any) {
         var sent = 'SELECT * FROM ' + tabla 
         return this.http.post(`${this.API_URI}/index.php`, { sentencia: sent, token: this.getToken() });

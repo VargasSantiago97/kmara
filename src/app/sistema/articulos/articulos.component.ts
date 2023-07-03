@@ -9,48 +9,21 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ArticulosComponent {
 
-    rubros: any = []
     selectedRubro: any = ''
+    selectedSubRubro: any = ''
+    selectedArticulo: any = ''
 
-    pass:any = ''
+    subrubros: any = [];
 
-    db_campos:any = [
-        {
-            id: 'asd1',
-            alias: 'asd1',
-            has: 'asd1',
-            activo: 'asd1',
-            estado: 'asd1',
-        },
-        {
-            id: 'asd2',
-            alias: 'asd1',
-            has: 'asd1',
-            activo: 'asd1',
-            estado: 'asd1',
-        },
-        {
-            id: 'asd3',
-            alias: 'asd1',
-            has: 'asd1',
-            activo: 'asd1',
-            estado: 'asd1',
-        },
-        {
-            id: 'asd4',
-            alias: 'asd1',
-            has: 'asd1',
-            activo: 'asd1',
-            estado: 'asd1',
-        }
-    ]
 
-    campo_select: any = ''
+    db_campos:any = []
 
 
     displayRubro: any = false
     displaySubRubro: any = false
     displayArticulo: any = false
+
+    db:any = [];
 
     constructor(
         private cs: ComunicacionService,
@@ -58,10 +31,16 @@ export class ArticulosComponent {
     ){}
 
     ngOnInit(){
-        this.rubros = [
-            { alias: 'SEMILLAS', id: 'sem'},
-            { alias: 'FERTILIZANTE', id: 'fer'},
-        ]
+
+        this.cs.getDB('rubros', this.db)
+        this.cs.getDB('subrubros', this.db)
+
+        setTimeout(() => {
+            console.log(this.db)
+        }, 1000)
+    }
+    actualizarSubRubros(){
+        this.subrubros = this.db['subrubros'].filter((e:any) => { return e.id_rubro == this.selectedRubro })
     }
 
 
@@ -71,18 +50,14 @@ export class ArticulosComponent {
     }
     CREAR(){
         var data:any = {
-            id: 1,
-            alias: 'Santy',
-            nombre: 'Santiago',
-            apellido: 'Vargas',
-            email: 'oficina.sociedad.ny@gmail.com',
-            contrasena: '54b7b66470bcfaf011f10aaad6b4796a1c606f1421032faa40452dd530dc845b',
-            imagen: '',
+            id: 'D1D1D1D1D1D1',
+            alias: 'MAIZ',
+            color: '#F7FF00',
             datos: '{}',
             estado: 1,
         }
 
-        this.cs.createDB('users', data, () => { console.log(data) } )
+        this.cs.createDB('subrubros', data, () => { console.log(data) } )
     }
     MODIFICAR(){
         var data:any = {
@@ -109,9 +84,15 @@ export class ArticulosComponent {
 
 
     crearTabla(){
-        //this.cs.getDB('users', data, () => { console.log(data) })
-
-        //CREATE TABLE `moliendas`.`rubros` ( `id` VARCHAR(12) NOT NULL , `alias` INT NOT NULL , `color` INT NOT NULL , `datos` TEXT NOT NULL , `estado` INT NOT NULL ) ENGINE = InnoDB;
+        var consulta = 'CREATE TABLE `moliendas`.`subrubros` ( `id` VARCHAR(12) NOT NULL , `alias` VARCHAR(100) NOT NULL , `color` VARCHAR(30) NOT NULL , `datos` TEXT NOT NULL , `estado` INT NOT NULL ) ENGINE = InnoDB'
+        this.cs.dbConsulta(consulta).subscribe(
+            (res:any) => {
+                console.log(res)
+            },
+            (err:any) => {
+                console.error(err)
+            }
+        )
     }
 /* 
     "id": 2490,

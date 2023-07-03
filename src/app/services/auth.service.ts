@@ -17,7 +17,6 @@ export class AuthService {
     ) { }
 
     verificarSesion(){
-        console.log('sss')
         if(!this.existeSesion()){
             this.router.navigate(['/auth/login']);
         }
