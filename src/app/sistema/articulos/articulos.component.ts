@@ -23,7 +23,7 @@ export class ArticulosComponent {
     displaySubRubro: any = false
     displayArticulo: any = false
 
-    db:any = [];
+    db:any = {};
 
     constructor(
         private cs: ComunicacionService,
